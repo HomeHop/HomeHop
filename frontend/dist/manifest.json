@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "HomeHop",
+    "version": "1.0",
+    "description": "Aggregate and summarize rental listings from various websites.",
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": "icon.png"
+    },
+    "permissions": ["storage", "activeTab", "scripting"],
+    "host_permissions": ["<all_urls>"]
+  }
+  
