@@ -1,5 +1,6 @@
 # HomeHop - Google Chrome Built-in AI Challenge
-# Smart Rental Aggregator Chrome Extension
+
+Smart Rental Aggregator Chrome Extension
 
 The **Home Hop** Chrome Extension makes the process of finding the best rental properties across multiple platforms better, helping users make informed decisions quickly. With the integration of various AI-powered features, this extension offers summarized insights and advanced filtering options.
 
