@@ -1,8 +1,7 @@
 from flask import Flask, jsonify
 from mongo_db import get_listings, clear_database
-# from scrapers.craigslist_scraper import scrape_craigslist
-from scrappers.fb_scrapper import scrape_facebook
-from scrappers.kjiji_scrapper import scrape_kijiji
+from scrappers.rentfaster import query_rentfaster
+import requests
 
 app = Flask(__name__)
 
@@ -12,19 +11,13 @@ def fetch_listings():
     return jsonify(listings), 200
 
 @app.route("/scrape", methods=["POST"])
-def run_scrapers():
-    # scrape_craigslist()
-    scrape_facebook()
-    scrape_kijiji()
-    return jsonify({"message": "Scrapers ran successfully!"}), 200
-
-@app.route("/clear", methods=["DELETE"])
-def clear_db():
+def scrape_listings():
+    city = requests.json.get("city")
+    province = requests.json.get("province")
     clear_database()
-    return jsonify({"message": "Database cleared!"}), 200
-
-
-
+    query_rentfaster(city, province)
+    return jsonify({"message": "Scraping complete!"}), 200
 
 if __name__ == "__main__":
     app.run(debug=True)
+
