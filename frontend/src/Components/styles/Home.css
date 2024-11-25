@@ -1,0 +1,18 @@
+/* Home Component */
+.home-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .home-buttons a {
+    margin: 10px;
+    text-decoration: none;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .home-buttons a:hover {
+    background-color: #45a049;
+  }

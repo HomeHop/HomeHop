@@ -1,0 +1,16 @@
+/* Personalized Component */
+.personalized-container {
+    padding: 20px;
+  }
+  
+  .apartment-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .apt-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+  }
