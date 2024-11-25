@@ -1,14 +1,25 @@
-.App {
-  color: white;
-  text-align: center;
-  padding: 1rem;
+html,
+body {
+  width: 25rem; /* Match your container width */
+  height: 700px; /* Maximum height for popups */
+  max-height: 800px; /* Maximum height to prevent excessive size */
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Allow scrolling if content exceeds height */
+  position: relative; /* Change to relative for Chrome extension popup */
 }
 
 .container {
-  width: 15rem;
-  height: 15rem;
+  width: 100%; /* Take the full width of the popup */
+  height: 100%; /* Take the full height of the popup */
   background-color: green;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Add smooth scrolling for better user experience */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
 }
