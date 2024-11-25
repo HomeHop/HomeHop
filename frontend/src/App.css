@@ -12,7 +12,8 @@ body {
 .container {
   width: 100%; /* Take the full width of the popup */
   height: 100%; /* Take the full height of the popup */
-  background-color: green;
+  /* /* background-color:  need a nice green colour here */
+  background-color: #A7D934;
   display: flex;
   justify-content: center;
   align-items: center;
