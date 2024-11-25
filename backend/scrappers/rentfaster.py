@@ -2,6 +2,7 @@ import requests
 import time
 import os
 import pandas as pd
+from mongo_db import insert_listings_from_csv
 
 def query_rentfaster(city, province):
     results_df = pd.DataFrame()
@@ -26,14 +27,15 @@ def query_rentfaster(city, province):
         print(f"Scraping page {page}...")
         print(f"Total listings scraped: {len(results_df)}")
         time.sleep(1)
+        # time.sleep(10)  # Be nice to the server
 
-        
-        # time.sleep(10)
 
 if __name__ == "__main__":
     #take user input for city and province
     city = input("Enter the city: ")
     province = input("Enter the province: ")
     query_rentfaster(city, province)
-    
+
+    #insert listings into the database
+    insert_listings_from_csv(city + '.csv')
     print("Scraping complete!")
