@@ -1,46 +1,57 @@
 import './App.css';
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import NavBar from './components/NavBar/NavBar';
+import Home from './components/Home/Home';
+import Personalized from './components/Personalized/Personalized';
 
 function App() {
-  const [listings, setListings] = useState([]);
-  const [filter, setFilter] = useState("");
+  const [page, setPage] = useState('home'); // Tracks the current page
+  const [houses, setHouses] = useState([]); // Stores filtered house data
 
-  useEffect(() => {
-    const fetchData = () => {
-      const data = [
-        { id: 1, name: "Apartment A", price: "$1200/month", location: "Downtown" },
-        { id: 2, name: "Studio B", price: "$900/month", location: "Suburbs" },
-        { id: 3, name: "Condo C", price: "$1500/month", location: "City Center" },
-      ];
-      setListings(data);
-    };
+  // Function to handle form submission from the Personalize page
+  const submitPreferences = (preferences) => {
+    // Simulate fetching houses based on user preferences
+    const fetchedHouses = [
+      {
+        id: 1,
+        name: 'Apartment A',
+        price: '$1200/month',
+        rooms: 2,
+        pets: true,
+        washrooms: 1,
+        rank: 'Great Match',
+        location: { lat: 53.5461, lng: -113.4938 },
+      },
+      {
+        id: 2,
+        name: 'Studio B',
+        price: '$900/month',
+        rooms: 1,
+        pets: false,
+        washrooms: 1,
+        rank: 'Good Match',
+        location: { lat: 53.5444, lng: -113.4909 },
+      },
+    ];
 
-    fetchData();
-  }, []);
+    setHouses(fetchedHouses); // Update the house data
+    setPage('map'); // Navigate to the map page
+  };
 
-  const filteredListings = listings.filter((listing) =>
-    listing.location.toLowerCase().includes(filter.toLowerCase())
-  );
+  const navigate = (target) => {
+    setPage(target);
+  };
 
   return (
-    <div className="App">
-      <h1>Rental Listings</h1>
-      <input
-        type="text"
-        placeholder="Filter by location"
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-      />
-      <ul>
-        {filteredListings.map((listing) => (
-          <li key={listing.id}>
-            <strong>{listing.name}</strong>: {listing.price} - {listing.location}
-          </li>
-        ))}
-      </ul>
+    <div className="app">
+      <NavBar navigate={navigate} />
+      {page === 'home' && <Home navigate={navigate} />}
+      {page === 'personalize' && <Personalized submitPreferences={submitPreferences} />}
+      {page === 'map' && <div>Map Page</div>}
     </div>
   );
 }
 
+
+  
 export default App;

@@ -1,26 +1,13 @@
 html,
 body {
-  width: 25rem; /* Match your container width */
-  height: 700px; /* Maximum height for popups */
-  max-height: 800px; /* Maximum height to prevent excessive size */
+  width: 700px;
+  height: 600px;
   margin: 0;
   padding: 0;
-  overflow-y: auto; /* Allow scrolling if content exceeds height */
-  position: relative; /* Change to relative for Chrome extension popup */
+  overflow-y: auto; 
+  position: relative; 
+  font-family: Arial, sans-serif; /* Improved font */
+  /* position: fixed; */
 }
 
-.container {
-  width: 100%; /* Take the full width of the popup */
-  height: 100%; /* Take the full height of the popup */
-  /* /* background-color:  need a nice green colour here */
-  background-color: #A7D934;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-/* Add smooth scrolling for better user experience */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
-}
