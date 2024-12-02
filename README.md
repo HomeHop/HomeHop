@@ -32,9 +32,6 @@
   - "Are there good schools nearby?"
   - Provides valuable context to assist with the decision-making process.
 
-### 4. **Translation API**
-- Translates **reviews** or **rental details** into different languages, ensuring international users can access the content without language barriers.
-
 ## Features
 - **Aggregates rental listings** from popular platforms like Zillow, Craigslist, Facebook Marketplace, and others.
 - Provides a comprehensive overview of available properties to make comparisons easier.
@@ -62,15 +59,7 @@ Proceed to describe how to install / setup one's local environment / get started
 
 
 ## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
-
-Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
-
-To do:
-- Feature to be added 1
-- Feature to be added 2
+- The next steps for **HomeHop** include expanding data sources to cover more platforms and rental types. We plan to refine our filtering system with more advanced AI-powered suggestions, enhance neighborhood insights with visual maps, and integrate real-time alerts for price changes. We can use Translate API to make our project available around the world. Eventually, we aim to launch **HomeHop** as a comprehensive rental assistant available on multiple browsers and devices, transforming how people find their next home globally.
 
 
 ## License
