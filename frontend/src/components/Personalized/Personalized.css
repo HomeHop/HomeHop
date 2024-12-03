@@ -1,0 +1,115 @@
+/* Personalized.css */
+
+/* Main Section Styling */
+.personalize-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 700px;
+    background-color: #a7d934;
+    padding: 40px 20px;
+    text-align: center;
+    gap: 20px;
+    background-image: url("../images/greenback.jpg");
+  }
+  
+  .personalize-section h1 {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  
+  .personalize-section p {
+    font-size: 1.2em;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+  
+  /* Form Styling */
+  .personalize-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  input[type="number"],
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  input[type="checkbox"] {
+    margin-top: 10px;
+    transform: scale(1.5);
+  }
+  
+  button {
+    padding: 15px 30px;
+    background-color: #a7d934;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #8fc12b;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .personalize-section h1 {
+      font-size: 2.5em;
+    }
+  
+    .personalize-section p {
+      font-size: 1em;
+    }
+  
+    .personalize-form {
+      padding: 20px;
+      gap: 15px;
+    }
+  
+    label {
+      font-size: 1em;
+    }
+  }
+  
+  @media screen and (max-width: 567px) {
+    .personalize-section {
+      padding: 20px;
+    }
+  
+    .personalize-form {
+      width: 90%;
+    }
+  
+    button {
+      font-size: 1em;
+      padding: 10px 20px;
+    }
+  }
+  
