@@ -11,8 +11,11 @@
     "declarativeNetRequest",
     "declarativeNetRequestFeedback",
     "webNavigation",
-    "sidePanel"
+    "sidePanel",
+    "aiLanguageModelOriginTrial"
   ],
+
+  
   "host_permissions": [
     "https://www.google.com/maps/*"
   ],

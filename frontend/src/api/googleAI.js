@@ -6,7 +6,7 @@ import {
   
   // IMPORTANT: Replace this with secure handling of your API key.
   // See notes below about securing the API key.
-  const apiKey = '';
+  const apiKey = 'AIzaSyA_0YenPT7Yja6EHeUyjkBGzRqvdLSysck';
   
   let genAI = null;
   let model = null;

@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
 import Personalized from './components/Personalized/Personalized';
-import { initModel, runPrompt } from './api/googleAI';
+import {runPrompt} from './api/googleGemini';
+
 
 function App() {
   const [page, setPage] = useState('home'); // Tracks the current page
@@ -13,21 +14,26 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // function to handle the prompt, params and response
   const handlePrompt = async () => {
-    setLoading(true);
-    setError('');
-    setResponse('');
     try {
-      initModel(); // Initialize the model if not already initialized
-      const result = await runPrompt(prompt);
-      setResponse(result);
-    } catch (e) {
-      setError('Failed to generate response');
-    } finally {
+      const params = {
+        systemPrompt: 'You are a helpful and friendly assistant.',
+        
+      }
+      setLoading(true);
+      const response = await runPrompt(prompt, params);
+      setResponse(response);
+      setLoading(false);
+
+    }
+    catch (e) {
+      console.error('Error running prompt:', e);
+      setError('Error running prompt');
       setLoading(false);
     }
-  };
 
+  };
 
   // Function to handle form submission from the Personalize page
   const submitPreferences = (preferences) => {
