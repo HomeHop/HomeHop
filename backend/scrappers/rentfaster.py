@@ -2,7 +2,6 @@ import requests
 import time
 import os
 import pandas as pd
-from mongo_db import insert_listings_from_csv
 
 def query_rentfaster(city, province):
     results_df = pd.DataFrame()

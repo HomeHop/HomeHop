@@ -48,6 +48,8 @@ const Personalize = ({ submitPreferences }) => {
             });
         }
     });
+
+    submitPreferences(preferences);
 };
 
 
