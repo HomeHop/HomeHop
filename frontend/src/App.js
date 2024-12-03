@@ -3,10 +3,31 @@ import React, { useState } from 'react';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
 import Personalized from './components/Personalized/Personalized';
+import { initModel, runPrompt } from './api/googleAI';
 
 function App() {
   const [page, setPage] = useState('home'); // Tracks the current page
   const [houses, setHouses] = useState([]); // Stores filtered house data
+  const [prompt, setPrompt] = useState(''); // State to hold user input
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handlePrompt = async () => {
+    setLoading(true);
+    setError('');
+    setResponse('');
+    try {
+      initModel(); // Initialize the model if not already initialized
+      const result = await runPrompt(prompt);
+      setResponse(result);
+    } catch (e) {
+      setError('Failed to generate response');
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   // Function to handle form submission from the Personalize page
   const submitPreferences = (preferences) => {
@@ -48,6 +69,24 @@ function App() {
       {page === 'home' && <Home navigate={navigate} />}
       {page === 'personalize' && <Personalized submitPreferences={submitPreferences} />}
       {page === 'map' && <div>Map Page</div>}
+      <textarea
+        placeholder="Enter your prompt here"
+        value={prompt} // Controlled component
+        onChange={(e) => setPrompt(e.target.value)} // Update prompt state
+        rows="4"
+        cols="50"
+      />
+      <br />
+      <button onClick={handlePrompt} disabled={!prompt || loading}>
+        {loading ? 'Generating...' : 'Run Prompt'}
+      </button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {response && (
+        <div>
+          <h2>Response:</h2>
+          <p>{response}</p>
+        </div>
+      )}
     </div>
   );
 }
