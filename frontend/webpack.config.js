@@ -30,11 +30,7 @@ module.exports = {
         // Copy static files to the root of 'dist'
         new CopyPlugin({
             patterns: [
-                { from: "public/manifest.json", to: "manifest.json" },
-                { from: "public/background.js", to: "background.js" },
-                { from: "public/content.js", to: "content.js" },
-                { from: "public/icon.png", to: "icon.png" },
-                // { from: "public/index.html", to: "index.html" },
+                { from: "manifest.json", to: "manifest.json" }
             ],
         }),
     ],

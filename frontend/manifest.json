@@ -1,13 +1,35 @@
 {
-    "manifest_version": 3,
-    "name": "HomeHop",
-    "version": "1.0",
-    "description": "Aggregate and summarize rental listings from various websites using Google APIs.",
-    "action": {
-      "default_popup": "index.html",
-      "default_icon": "icon.png"
-    },
-    "permissions": ["storage", "activeTab", "scripting"],
-    "host_permissions": ["<all_urls>"]
+  "manifest_version": 3,
+  "name": "HomeHop",
+  "version": "1.0",
+  "description": "Aggregate and summarize rental listings from various websites using Google APIs.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "webNavigation",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://www.google.com/maps/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/maps/*"],
+      "js": ["content.js"]
+    }
+    
+  ],
+  "side_panel": {
+      "default_path": "dist/index.html"
+  },
+  "action": {
+    "default_icon": "images/icon.png"
   }
-  
+}

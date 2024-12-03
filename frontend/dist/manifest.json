@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "HomeHop",
-  "version": "3.0",
-  "description": "Add custom markers to Google Maps.",
+  "version": "1.0",
+  "description": "Aggregate and summarize rental listings from various websites using Google APIs.",
   "permissions": [
     "storage",
     "tabs",
@@ -10,7 +10,8 @@
     "scripting",
     "declarativeNetRequest",
     "declarativeNetRequestFeedback",
-    "webNavigation"
+    "webNavigation",
+    "sidePanel"
   ],
   "host_permissions": [
     "https://www.google.com/maps/*"
@@ -23,9 +24,12 @@
       "matches": ["https://www.google.com/maps/*"],
       "js": ["content.js"]
     }
+    
   ],
+  "side_panel": {
+      "default_path": "dist/index.html"
+  },
   "action": {
-    "default_popup": "index.html",
-    "default_icon": "icon.png"
+    "default_icon": "images/icon.png"
   }
 }

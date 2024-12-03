@@ -16,7 +16,7 @@
     padding: 0px 10%;
     min-height: 600px;
     /* background-image: url("../images/home-background.jpg"); Replace with your actual image path */
-    background-image: url("../images/greenback.jpg");
+    background-image: url("../../../images/greenback.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
