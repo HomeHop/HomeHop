@@ -29,17 +29,28 @@ const Personalize = ({ submitPreferences }) => {
         { lat: 53.5444, lng: -113.4909, name: 'House B', price: '$900/month' },
     ];
 
-    // Send house data to the background script
-    chrome.runtime.sendMessage({ type: 'ADD_MARKERS', payload: houseData }, (response) => {
+    // Open Google Maps first
+    chrome.runtime.sendMessage({ type: "OPEN_GOOGLE_MAPS" }, (response) => {
         if (chrome.runtime.lastError) {
-            console.error('Runtime error:', chrome.runtime.lastError.message);
+            console.error("Error opening Google Maps:", chrome.runtime.lastError.message);
         } else if (response && response.success) {
-            console.log('House data sent to background script successfully!');
-        } else {
-            console.error('Failed to send house data. Response:', response);
+            console.log("Google Maps opened successfully!");
+
+            // Send house data to the background script
+            chrome.runtime.sendMessage({ type: "ADD_MARKERS", payload: houseData }, (response) => {
+                if (chrome.runtime.lastError) {
+                    console.error("Error sending markers:", chrome.runtime.lastError.message);
+                } else if (response && response.success) {
+                    console.log("House data sent successfully!");
+                } else {
+                    console.error("Failed to send house data. Response:", response);
+                }
+            });
         }
     });
 };
+
+
 
 
   return (

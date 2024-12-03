@@ -1,16 +1,22 @@
 {
   "manifest_version": 3,
-  "name": "Google Maps Marker Extension",
+  "name": "HomeHop",
   "version": "3.0",
   "description": "Add custom markers to Google Maps.",
-  "permissions": ["storage", "tabs", "activeTab"],
-  "externally_connectable": {
-    "matches": ["https://www.google.com/maps/*"]
-  },
-
-
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "https://www.google.com/maps/*"
+  ],
   "background": {
-    "service_worker": "../src/background.js"
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
@@ -19,8 +25,7 @@
     }
   ],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "index.html",
     "default_icon": "icon.png"
-  },
-  "host_permissions": ["https://www.google.com/maps/*"]
+  }
 }

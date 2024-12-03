@@ -4,49 +4,59 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: {
-        index: "./src/index.js" // Updated to point to the JavaScript entry file
+        index: "./src/index.js", // React app entry point
     },
     mode: "production",
+    output: {
+        path: path.resolve(__dirname, "dist"), // Output everything to 'dist' directory
+        filename: "js/[name].bundle.js", // JavaScript files go into 'dist/js/'
+    },
     module: {
         rules: [
             {
+                test: /\.(js|jsx)$/, // Match JavaScript and JSX files
                 exclude: /node_modules/,
-                test: /\.(js|jsx)$/, // Updated to match JavaScript files
-                use: ["babel-loader"], // Use Babel to transpile JavaScript
+                use: ["babel-loader"], // Use Babel for transpiling
             },
             {
-                exclude: /node_modules/,
-                test: /\.css$/i,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                ],
+                test: /\.css$/, // Match CSS files
+                use: ["style-loader", "css-loader"], // Load CSS files
             },
         ],
     },
     plugins: [
+        // Generate HTML files for each entry point
+        ...getHtmlPlugins(["index"]),
+        // Copy static files to the root of 'dist'
         new CopyPlugin({
             patterns: [
-                { from: "manifest.json", to: "../manifest.json" },
+                { from: "public/manifest.json", to: "manifest.json" },
+                { from: "public/background.js", to: "background.js" },
+                { from: "public/content.js", to: "content.js" },
+                { from: "public/icon.png", to: "icon.png" },
+                // { from: "public/index.html", to: "index.html" },
             ],
         }),
-        ...getHtmlPlugins(["index"]),
     ],
     resolve: {
-        extensions: [".js"], // Updated to resolve only JavaScript files
+        extensions: [".js", ".jsx"], // Resolve JavaScript and JSX extensions
     },
-    output: {
-        path: path.join(__dirname, "dist"), // Output to 'dist' directory (not 'dist/js')
-        filename: "js/[name].js",
+    devServer: {
+        static: {
+            directory: path.join(__dirname, "dist"), // Serve content from 'dist'
+        },
+        compress: true,
+        port: 3000, // Development server port
     },
 };
 
+// Helper function to generate HTML plugins
 function getHtmlPlugins(chunks) {
     return chunks.map(
         (chunk) =>
             new HTMLPlugin({
-                title: "React extension",
-                filename: `${chunk}.html`,
+                title: "React Chrome Extension",
+                filename: `${chunk}.html`, // Output HTML files into 'dist'
                 chunks: [chunk],
             })
     );
