@@ -6,12 +6,12 @@ const Home = ({ navigate }) => {
     <div className="home-section">
       {/* Logo or Hero Image */}
       <div className="image-wrapper">
-        <img src="logo.svg" alt="App Logo" />
+        <img src="../images/icon.png" alt="App Logo" />
       </div>
 
       {/* Headline and Subtext */}
       <div className="content">
-        <h1>Welcome to Our App</h1>
+        <h1>Welcome to HomeHop</h1>
         <p>Your smart solution for finding the perfect home.</p>
 
         {/* Call-to-Action Button */}

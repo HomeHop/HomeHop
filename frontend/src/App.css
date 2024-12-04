@@ -1,13 +1,10 @@
-html,
-body {
-  width: 700px;
-  height: 600px;
+html, body {
   margin: 0;
   padding: 0;
-  overflow-y: auto; 
+  width: 100%; /* Ensures the width scales with the side panel */
+  height: 100%; /* Ensures the height adjusts dynamically */
+  overflow-y: auto;
   position: relative; 
   font-family: Arial, sans-serif; /* Improved font */
-  /* position: fixed; */
+  box-sizing: border-box; /* Ensures consistent padding and border sizing */
 }
-
-
