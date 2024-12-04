@@ -2,114 +2,166 @@
 
 /* Main Section Styling */
 .personalize-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 700px;
-    background-color: #a7d934;
-    padding: 40px 20px;
-    text-align: center;
-    gap: 20px;
-    background-image: url("../../../images/greenback.jpg");
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 700px;
+  background-color: #a7d934;
+  padding: 40px 20px;
+  text-align: center;
+  gap: 20px;
+  background-image: url("../../../images/greenback.jpg");
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.personalize-section:hover {
+  transform: scale(1.02);
+}
+
+.personalize-section h1 {
+  font-size: 3em;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.personalize-section p {
+  font-size: 1.2em;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+/* Form Styling */
+.personalize-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.personalize-form:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.2em;
+  color: #333;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus {
+  border-color: #a7d934;
+  outline: none;
+}
+
+input[type="checkbox"] {
+  margin-top: 10px;
+  transform: scale(1.5);
+}
+
+button {
+  padding: 15px 30px;
+  background-color: #a7d934;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background-color: #8fc12b;
+  transform: translateY(-2px);
+}
+
+/* Styles for the blurred form */
+.form-blur {
+  filter: blur(5px);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Styles for the loading spinner */
+.loading-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
   .personalize-section h1 {
-    font-size: 3em;
-    color: #fff;
-    margin-bottom: 10px;
-  }
-  
-  .personalize-section p {
-    font-size: 1.2em;
-    color: #fff;
-    margin-bottom: 30px;
-  }
-  
-  /* Form Styling */
-  .personalize-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 500px;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 1.2em;
-    color: #333;
-  }
-  
-  input[type="number"],
-  input[type="text"],
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  input[type="checkbox"] {
-    margin-top: 10px;
-    transform: scale(1.5);
-  }
-  
-  button {
-    padding: 15px 30px;
-    background-color: #a7d934;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #8fc12b;
-  }
-  
-  /* Responsive Design */
-  @media screen and (max-width: 768px) {
-    .personalize-section h1 {
       font-size: 2.5em;
-    }
-  
-    .personalize-section p {
+  }
+
+  .personalize-section p {
       font-size: 1em;
-    }
-  
-    .personalize-form {
+  }
+
+  .personalize-form {
       padding: 20px;
       gap: 15px;
-    }
-  
-    label {
-      font-size: 1em;
-    }
   }
-  
-  @media screen and (max-width: 567px) {
-    .personalize-section {
+
+  label {
+      font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .personalize-section {
       padding: 20px;
-    }
-  
-    .personalize-form {
+  }
+
+  .personalize-form {
       width: 90%;
-    }
-  
-    button {
+  }
+
+  button {
       font-size: 1em;
       padding: 10px 20px;
-    }
   }
-  
+}
