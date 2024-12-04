@@ -48,7 +48,7 @@
 
 ## Screenshots
 ![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
+<img width="1436" alt="Screenshot 2024-12-03 at 11 27 46 PM" src="https://github.com/user-attachments/assets/7e2b731f-251d-4202-ba4a-045708ccfe7c">
 
 ## Setup
 `npm install`
