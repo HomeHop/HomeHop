@@ -5,6 +5,7 @@ const ListHome = ({ houses }) => {
   const [filter, setFilter] = useState('none'); // State to manage the selected filter
   const [userLocation, setUserLocation] = useState(null); // State to store user location
   const [locationError, setLocationError] = useState(null); // State for location error
+  console.log(houses);
 
   // Fetch user location on component mount
   useEffect(() => {
@@ -51,7 +52,11 @@ const ListHome = ({ houses }) => {
     return houses; // Default: no sorting
   };
 
+
   const filteredHouses = getFilteredHouses();
+
+
+
 
   return (
     <div className="list-home">
@@ -79,21 +84,25 @@ const ListHome = ({ houses }) => {
       <ul className="home-list">
         {filteredHouses.map((house) => (
           <li key={house.id} className="home-item">
-            <h2 className="home-name">{house.name}</h2>
-            <p className="home-price">Price: <span>{house.price}</span></p>
-            <p>Rooms: {house.rooms}</p>
-            <p>Pets Allowed: {house.pets ? 'Yes' : 'No'}</p>
-            <p>Washrooms: {house.washrooms}</p>
-            <p>Rank: {house.rank}</p>
-            <p>
-              Location: {house.location.lat}, {house.location.lng}
-              {userLocation && (
-                <>
-                  <br />
-                  Distance: {calculateDistance(house.location).toFixed(2)} km
-                </>
-              )}
-            </p>
+            <h2 className="home-title">{house.title}</h2>
+            <p>Type: {house.type}</p>
+            <p>Price: ${house.price}</p>
+            <p>Bedrooms: {house.bedrooms}</p>
+            <p>Bathrooms: {house.baths}</p>
+            <p>Availability: {house.availability}</p>
+            <p>Utilities Included: {house.utilities_included ? 'Yes' : 'No'}</p>
+            <p>Cats Allowed: {house.cats ? 'Yes' : 'No'}</p>
+            <p>Dogs Allowed: {house.dogs ? 'Yes' : 'No'}</p>
+            <p>Features: {house.features.join(', ')}</p>
+            <p>Address: {house.address}</p>
+            <p>City: {house.city}</p>
+            <p>Province: {house.province}</p>
+            <p>Location: {house.location}</p>
+            {userLocation && (
+              <p>
+                Distance: {calculateDistance({ lat: house.latitude, lng: house.longitude }).toFixed(2)} km
+              </p>
+            )}
           </li>
         ))}
       </ul>

@@ -10,7 +10,9 @@ def parse_csv(file_path):
             listing = {
                 'id': row['id'],
                 'title': row['title'],
-                'price': row['price'],
+                # the price: '1 - 2' make it an int with the greater value ir last value
+                #eg '1 - 2' -> 2
+                'price': int(row['price'].split(' - ')[0]),
                 'type': row['type'],
                 # 'sq_feet': row['sq_feet'],
                 'availability': row['availability'],
@@ -20,8 +22,10 @@ def parse_csv(file_path):
                 'address': row['address'],
                 'city': row['city'],
                 'province': row['province'],
-                'bedrooms': row['bedrooms'],
-                'baths': row['baths'],
+                #bedrooms: '1 - 2' make it an int with the greater value ir last value, if it is a string stuff like 'Studio' make it 1
+                'bedrooms': int(row['bedrooms'].split(' - ')[-1]) if row['bedrooms'].isdigit() else 1,
+                #baths: '1 - 2' make it an int with the greater value ir last value, if it is 2.5 or decimals justt round it to the nearest integer
+                'baths': round(float(row['baths'].split(' - ')[-1])),
                 'cats': row['cats'].lower() == 'true',
                 'dogs': row['dogs'].lower() == 'true',
                 'utilities_included': row['utilities_included'].lower() == 'true',

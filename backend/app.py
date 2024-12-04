@@ -33,13 +33,13 @@ def update_location():
 def scrape_listings():
     data = request.get_json()
     
-    if data.get("startScraping"):
-        city, province = convert_coordinates_to_address(latitude, longitude)
-        print(city, province)
+    # if data.get("startScraping"):
+    #     # city, province = convert_coordinates_to_address(latitude, longitude)
+    #     print(city, province)
 
     # #dummy city and province
-    # city = "Calgary"
-    # province = "AB"
+    city = "Calgary"
+    province = "AB"
 
     print(data.get("preferences"))
 

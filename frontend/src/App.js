@@ -15,6 +15,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+
+
   // function to handle the prompt, params and response
   const handlePrompt = async () => {
     try {
@@ -37,178 +39,51 @@ function App() {
   };
 
   // Function to handle form submission from the Personalize page
-  const submitPreferences = (preferences) => {
-    // Simulate fetching houses based on user preferences
-    const fetchedHouses = [
-      {
-        id: 1,
-        name: 'Apartment A',
-        price: 1200,
-        rooms: 2,
-        pets: true,
-        washrooms: 1,
-        rank: 'Great Match',
-        location: 'Downtown',
-        propertyType: 'Apartment',
-        parking: true,
-      },
-      {
-        id: 2,
-        name: 'Studio B',
-        price: 900,
-        rooms: 1,
-        pets: false,
-        washrooms: 1,
-        rank: 'Good Match',
-        location: 'Suburb',
-        propertyType: 'Studio',
-        parking: false,
-      },
-      {
-        id: 3,
-        name: 'House C',
-        price: 1500,
-        rooms: 3,
-        pets: true,
-        washrooms: 2,
-        rank: 'Great Match',
-        location: 'Downtown',
-        propertyType: 'House',
-        parking: true,
-      },
-      {
-        id: 4,
-        name: 'Apartment D',
-        price: 1100,
-        rooms: 2,
-        pets: false,
-        washrooms: 1,
-        rank: 'Good Match',
-        location: 'Suburb',
-        propertyType: 'Apartment',
-        parking: false,
-      },
-      // Add more houses as needed
-      {
-        id: 5,
-        name: 'Apartment E',
-        price: 1300,
-        rooms: 2,
-        pets: true,
-        washrooms: 1,
-        rank: 'Great Match',
-        location: 'Downtown',
-        propertyType: 'Apartment',
-        parking: true,
-      },
-      {
-        id: 6,
-        name: 'Studio F',
-        price: 950,
-        rooms: 1,
-        pets: false,
-        washrooms: 1,
-        rank: 'Good Match',
-        location: 'Suburb',
-        propertyType: 'Studio',
-        parking: false,
-      },
-      {
-        id: 7,
-        name: 'House G',
-        price: 1600,
-        rooms: 3,
-        pets: true,
-        washrooms: 2,
-        rank: 'Great Match',
-        location: 'Downtown',
-        propertyType: 'House',
-        parking: true,
-      },
-      {
-        id: 8,
-        name: 'Apartment H',
-        price: 1200,
-        rooms: 2,
-        pets: false,
-        washrooms: 1,
-        rank: 'Good Match',
-        location: 'Suburb',
-        propertyType: 'Apartment',
-        parking: false,
-      },
-      {
-        id: 9,
-        name: 'Apartment I',
-        price: 1400,
-        rooms: 2,
-        pets: true,
-        washrooms: 1,
-        rank: 'Great Match',
-        location: 'Downtown',
-        propertyType: 'Apartment',
-        parking: true,
-      },
-      {
-        id: 10,
-        name: 'Studio J',
-        price: 1000,
-        rooms: 1,
-        pets: false,
-        washrooms: 1,
-        rank: 'Good Match',
-        location: 'Suburb',
-        propertyType: 'Studio',
-        parking: false,
-      },
-      {
-        id: 11,
-        name: 'House K',
-        price: 1700,
-        rooms: 3,
-        pets: true,
-        washrooms: 2,
-        rank: 'Great Match',
-        location: 'Downtown',
-        propertyType: 'House',
-        parking: true,
-      },
-      {
-        id: 12,
-        name: 'Apartment L',
-        price: 1300,
-        rooms: 2,
-        pets: false,
-        washrooms: 1,
-        rank: 'Good Match',
-        location: 'Suburb',
-        propertyType: 'Apartment',
-        parking: false,
-      },
-    ];
+  const submitPreferences = (preferences, HouseData) => {
+    console.log('Preferences:', preferences);
+    console.log('House Data:', HouseData);
 
-    
     // Filter houses based on preferences
-    const filteredHouses = fetchedHouses.filter(house => {
+    const filteredHouses = HouseData.filter((house) => {
+      // Check if the house meets the user's preferences
       return (
-        house.rooms >= preferences.rooms &&
-        house.pets === preferences.pets &&
-        house.price <= preferences.budget &&
-        house.washrooms >= preferences.washrooms &&
-        house.propertyType === preferences.propertyType &&
-        house.location === preferences.preferredLocations &&
-        house.parking === preferences.parking
+        house.price <= preferences.price &&
+        house.bedrooms >= preferences.bedrooms &&
+        house.baths >= preferences.baths &&
+        (preferences.cats ? house.cats_allowed : true) &&
+        (preferences.dogs ? house.dogs_allowed : true) &&
+        (preferences.utilities_included ? house.utilities_included : true) &&
+        (preferences.type === 'Any' ? true : house.type === preferences.type) &&
+        (preferences.features.length === 0
+          ? true
+          : preferences.features.every((feature) => house.features.includes(feature)))
       );
     });
 
+    //eg data
+    // "address": "524 10th Ave",
+    // "availability": "Immediate",
+    // "baths": 2,
+    // "bedrooms": 1,
+    // "cats": true,
+    // "city": "Calgary",
+    // "dogs": true,
+    // "features": "['Elevator', 'Storage Lockers', 'Zero-Step Entrance', 'Fridge']",
+    // "location": "Beltline",
+    // "price": 1881,
+    // "province": "Alberta",
+    // "title": "The Oliver East - New Luxury Beltline Lifestyle - $500 Security Deposit",
+    // "type": "Apartment",
+    // "utilities_included": false
 
-    console.log('filteredHouses:', filteredHouses);
-
-
-
-    setHouses(filteredHouses); // Update houses state with filtered houses
-    setPage('listHome'); // Navigate to the listHome page
+    // Update the houses state with the filtered houses
+    setHouses(filteredHouses);
+    // Navigate to the listHome page
+    setPage('listHome');
+    
   };
+
+  
 
   const navigate = (target) => {
     setPage(target);

@@ -4,13 +4,17 @@ import './Personalized.css';
 
 const Personalize = ({ submitPreferences }) => {
   const [preferences, setPreferences] = useState({
-    rooms: 1,
-    pets: false,
-    budget: 1000,
-    washrooms: 1,
-    propertyType: 'Apartment',
-    preferredLocations: '',
-    parking: false,
+
+    // Default preferences based on the data example
+    available: 'Immediate',
+    baths: '2',
+    bedrooms: '2',
+    cats: true,
+    dogs: true,
+    features: ['Dishwasher', 'In-suite Storage', 'Laundry - Shared', 'Balcony'],
+    price: '1435',
+    type: 'Apartment',
+    utilities_included: false,
     useCurrentLocation: false,
     currentLocation: null,
   });
@@ -20,6 +24,20 @@ const Personalize = ({ submitPreferences }) => {
     setPreferences({
       ...preferences,
       [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  const handleFeaturesChange = (e) => {
+    const options = e.target.options;
+    const selectedFeatures = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedFeatures.push(options[i].value);
+      }
+    }
+    setPreferences({
+      ...preferences,
+      features: selectedFeatures,
     });
   };
 
@@ -83,11 +101,12 @@ const Personalize = ({ submitPreferences }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const houseData = [];
 
-    const houseData = [
-        { lat: 53.5461, lng: -113.4938, name: 'House A', price: '$1200/month' },
-        { lat: 53.5444, lng: -113.4909, name: 'House B', price: '$900/month' },
-    ];
+    // const houseData = [
+    //     { lat: 53.5461, lng: -113.4938, name: 'House A', price: '$1200/month' },
+    //     { lat: 53.5444, lng: -113.4909, name: 'House B', price: '$900/month' },
+    // ];
 
     // Send request to backend to start scraping
     fetch('http://localhost:5000/scrape', {
@@ -100,7 +119,8 @@ const Personalize = ({ submitPreferences }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log('Scraping response:', data);
-        // submitPreferences(data.listings); // Call submitPreferences with the scraped listings
+        houseData.push(data);
+        
       })
       .catch((error) => {
         console.error('Error starting scraping:', error);
@@ -128,7 +148,7 @@ const Personalize = ({ submitPreferences }) => {
         }
     });
 
-    submitPreferences(preferences);
+    submitPreferences(preferences, houseData);
 };
 
   return (
@@ -137,24 +157,47 @@ const Personalize = ({ submitPreferences }) => {
       <p>Fill out the details below to customize your property search.</p>
       <form className="personalize-form" onSubmit={handleSubmit}>
         <label>
-          Rooms:
-          <input type="number" name="rooms" value={preferences.rooms} onChange={handleChange} />
+          Available:
+          <input type="text" name="available" value={preferences.available} onChange={handleChange} />
         </label>
         <label>
-          Pets Allowed:
-          <input type="checkbox" name="pets" checked={preferences.pets} onChange={handleChange} />
+          Baths:
+          <input type="range" name="baths" min="1" max="10" value={preferences.baths} onChange={handleChange} />
+          <span>{preferences.baths}</span>
         </label>
         <label>
-          Budget:
-          <input type="number" name="budget" value={preferences.budget} onChange={handleChange} />
+          Bedrooms:
+          <input type="range" name="bedrooms" min="1" max="10" value={preferences.bedrooms} onChange={handleChange} />
+          <span>{preferences.bedrooms}</span>
         </label>
         <label>
-          Washrooms:
-          <input type="number" name="washrooms" value={preferences.washrooms} onChange={handleChange} />
+          Cats Allowed:
+          <input type="checkbox" name="cats" checked={preferences.cats} onChange={handleChange} />
         </label>
         <label>
-          Property Type:
-          <select name="propertyType" value={preferences.propertyType} onChange={handleChange}>
+          Dogs Allowed:
+          <input type="checkbox" name="dogs" checked={preferences.dogs} onChange={handleChange} />
+        </label>
+        <label>
+          Features:
+          <select multiple={true} value={preferences.features} onChange={handleFeaturesChange}>
+            <option value="Dishwasher">Dishwasher</option>
+            <option value="In-suite Storage">In-suite Storage</option>
+            <option value="Laundry - Shared">Laundry - Shared</option>
+            <option value="Balcony">Balcony</option>
+            <option value="Air Conditioning">Air Conditioning</option>
+            <option value="Elevator">Elevator</option>
+            <option value="Parking">Parking</option>
+          </select>
+        </label>
+        <label>
+          Price:
+          <input type="range" name="price" min="0" max="10000" value={preferences.price} onChange={handleChange} />
+          <span>{preferences.price}</span>
+        </label>
+        <label>
+          Type:
+          <select name="type" value={preferences.type} onChange={handleChange}>
             <option value="Apartment">Apartment</option>
             <option value="House">House</option>
             <option value="Studio">Studio</option>
@@ -162,18 +205,8 @@ const Personalize = ({ submitPreferences }) => {
           </select>
         </label>
         <label>
-          Preferred Locations:
-          <input
-            type="text"
-            name="preferredLocations"
-            placeholder="Enter locations (e.g., Downtown, Suburbs)"
-            value={preferences.preferredLocations}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Parking Required:
-          <input type="checkbox" name="parking" checked={preferences.parking} onChange={handleChange} />
+          Utilities Included:
+          <input type="checkbox" name="utilities_included" checked={preferences.utilities_included} onChange={handleChange} />
         </label>
         <label>
           Use Current Location:
