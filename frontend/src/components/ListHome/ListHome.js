@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ListHome.css';
 
 const ListHome = ({ houses }) => {
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   if (houses.length > 0) {
+  //     setLoading(false);
+  //   }
+  // }, [houses]);
+
+  // if (loading) {
+  //   return <div className="loading">Loading...</div>;
+  // }
+
   return (
     <div className="list-home">
       <h1>List of Homes</h1>
