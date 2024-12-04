@@ -131,58 +131,144 @@ const Personalize = ({ submitPreferences }) => {
     submitPreferences(preferences);
 };
 
-  return (
-    <div className="personalize-section">
-      <h1>Personalize Your Search</h1>
-      <p>Fill out the details below to customize your property search.</p>
-      <form className="personalize-form" onSubmit={handleSubmit}>
-        <label>
-          Rooms:
-          <input type="number" name="rooms" value={preferences.rooms} onChange={handleChange} />
-        </label>
-        <label>
-          Pets Allowed:
-          <input type="checkbox" name="pets" checked={preferences.pets} onChange={handleChange} />
-        </label>
-        <label>
-          Budget:
-          <input type="number" name="budget" value={preferences.budget} onChange={handleChange} />
-        </label>
-        <label>
-          Washrooms:
-          <input type="number" name="washrooms" value={preferences.washrooms} onChange={handleChange} />
-        </label>
-        <label>
-          Property Type:
-          <select name="propertyType" value={preferences.propertyType} onChange={handleChange}>
-            <option value="Apartment">Apartment</option>
-            <option value="House">House</option>
-            <option value="Studio">Studio</option>
-            <option value="Condo">Condo</option>
-          </select>
-        </label>
-        <label>
-          Preferred Locations:
-          <input
-            type="text"
-            name="preferredLocations"
-            placeholder="Enter locations (e.g., Downtown, Suburbs)"
-            value={preferences.preferredLocations}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Parking Required:
-          <input type="checkbox" name="parking" checked={preferences.parking} onChange={handleChange} />
-        </label>
-        <label>
-          Use Current Location:
-          <button type="button" onClick={handleLocationToggle}>
-            {preferences.useCurrentLocation ? 'Disable' : 'Enable'}
-          </button>
-        </label>
-        <button type="submit">Submit</button>
-      </form>
+return (
+  <div className="personalize-section">
+    <div className="chrome-card">
+      <div className="content-wrapper">
+        {/* Header */}
+        <div className="extension-header fade-in">
+          <div className="logo-container">
+            <img src="../images/icon.png" alt="HomeHop Extension" className="extension-logo" />
+            <div className="chrome-badge">Chrome Extension</div>
+          </div>
+          <h1>Customize Your Search</h1>
+          <p className="subtitle">Tell us what you're looking for</p>
+          <div className="divider"></div>
+        </div>
+
+        {/* Form */}
+        <form className="preferences-form slide-up" onSubmit={handleSubmit}>
+          <div className="form-grid">
+            {/* Basic Info Section */}
+            <div className="form-section">
+              <h2>Basic Information</h2>
+              <div className="input-group">
+                <label>
+                  Budget
+                  <div className="input-with-icon">
+                    <span className="currency-symbol">$</span>
+                    <input
+                      type="number"
+                      name="budget"
+                      value={preferences.budget}
+                        onChange={handleChange}
+                        min="0"
+                        step="100"
+                      />
+                    </div>
+                  </label>
+                </div>
+
+                <div className="input-group">
+                  <label>
+                    Property Type
+                    <select name="propertyType" value={preferences.propertyType} onChange={handleChange}>
+                      <option value="Apartment">Apartment</option>
+                      <option value="House">House</option>
+                      <option value="Studio">Studio</option>
+                      <option value="Condo">Condo</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              {/* Features Section */}
+              <div className="form-section">
+                <h2>Features</h2>
+                <div className="number-inputs">
+                  <label>
+                    Bedrooms
+                    <input
+                      type="number"
+                      name="rooms"
+                      value={preferences.rooms}
+                      onChange={handleChange}
+                      min="0"
+                    />
+                  </label>
+                  <label>
+                    Bathrooms
+                    <input
+                      type="number"
+                      name="washrooms"
+                      value={preferences.washrooms}
+                      onChange={handleChange}
+                      min="0"
+                    />
+                  </label>
+                </div>
+
+                <div className="checkbox-group">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      name="pets"
+                      checked={preferences.pets}
+                      onChange={handleChange}
+                    />
+                    <span>Pet Friendly</span>
+                  </label>
+                  <label className="checkbox-label">
+                    <input type="checkbox"
+                      name="parking"
+                      checked={preferences.parking}
+                      onChange={handleChange}
+                    />
+                    <span>Parking Required</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Location Section */}
+              <div className="form-section full-width">
+                <h2>Location Preferences</h2>
+                <div className="input-group">
+                  <label>
+                    Preferred Locations
+                    <input
+                      type="text"
+                      name="preferredLocations"
+                      placeholder="e.g., Downtown, West End"
+                      value={preferences.preferredLocations}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </div>
+
+                <button
+                  type="button"
+                  className={`location-button ${preferences.useCurrentLocation ? 'active' : ''}`}
+                  onClick={handleLocationToggle}
+                >
+                <svg viewBox="0 0 24 24" className="location-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                  </svg>
+                  {preferences.useCurrentLocation ? 'Location Enabled' : 'Use Current Location'}
+                </button>
+                </div>
+            </div>
+
+            <button type="submit" className="cta-button">
+              <span className="button-content">
+                Find My Perfect Home
+                <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>  
     </div>
   );
 };

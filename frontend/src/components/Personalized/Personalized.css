@@ -1,115 +1,316 @@
-/* Personalized.css */
-
-/* Main Section Styling */
 .personalize-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 700px;
-    background-color: #a7d934;
-    padding: 40px 20px;
-    text-align: center;
-    gap: 20px;
-    background-image: url("../../../images/greenback.jpg");
+  min-height: 100vh;
+  background: linear-gradient(
+        rgba(221, 217, 101, 0.4),
+        rgba(130, 181, 111, 0.3)
+    );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.chrome-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 720px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.chrome-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
+}
+
+/* Header Styles */
+.extension-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.extension-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.chrome-badge {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #F2F3F5;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #5F6368;
+  white-space: nowrap;
+}
+
+.extension-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #202124;
+  margin: 1rem 0 0.5rem;
+}
+
+.subtitle {
+  color: #5F6368;
+  font-size: 1rem;
+}
+
+.divider {
+  height: 1px;
+  background: #E8EAED;
+  margin: 1.5rem 0;
+}
+
+/* Form Styles */
+.preferences-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-section.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #202124;
+  margin-bottom: 0.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Input Styles */
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #5F6368;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  padding: 0.75rem;
+  border: 1px solid #E8EAED;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #202124;
+  background: white;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #4285F4;
+  outline: none;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 0.75rem;
+  color: #5F6368;
+}
+
+.input-with-icon input {
+  padding-left: 1.75rem;
+}
+
+.number-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* Checkbox Styles */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid #E8EAED;
+  cursor: pointer;
+}
+
+/* Location Button */
+.location-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid #E8EAED;
+  border-radius: 8px;
+  background: white;
+  color: #5F6368;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.location-button.active {
+  background: #4285F4;
+  color: white;
+  border-color: #4285F4;
+}
+
+.location-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* CTA Button */
+.cta-button {
+  background: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.arrow-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.cta-button:hover {
+  background: #1A73E8;
+  transform: translateY(-1px);
+}
+
+.cta-button:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
   }
-  
-  .personalize-section h1 {
-    font-size: 3em;
-    color: #fff;
-    margin-bottom: 10px;
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
-  
-  .personalize-section p {
-    font-size: 1.2em;
-    color: #fff;
-    margin-bottom: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chrome-card {
+      padding: 1.5rem;
   }
-  
-  /* Form Styling */
-  .personalize-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 500px;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+  .form-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
   }
-  
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 1.2em;
-    color: #333;
+
+  .number-inputs {
+      grid-template-columns: 1fr;
   }
-  
-  input[type="number"],
-  input[type="text"],
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
+}
+
+@media (max-width: 480px) {
+  .personalize-section {
+      padding: 1rem;
   }
-  
-  input[type="checkbox"] {
-    margin-top: 10px;
-    transform: scale(1.5);
+
+  .chrome-card {
+      padding: 1.25rem;
+      border-radius: 12px;
   }
-  
-  button {
-    padding: 15px 30px;
-    background-color: #a7d934;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s;
+
+  .extension-header h1 {
+      font-size: 1.5rem;
   }
-  
-  button:hover {
-    background-color: #8fc12b;
+
+  .form-section {
+      gap: 1rem;
   }
-  
-  /* Responsive Design */
-  @media screen and (max-width: 768px) {
-    .personalize-section h1 {
-      font-size: 2.5em;
-    }
-  
-    .personalize-section p {
-      font-size: 1em;
-    }
-  
-    .personalize-form {
-      padding: 20px;
-      gap: 15px;
-    }
-  
-    label {
-      font-size: 1em;
-    }
-  }
-  
-  @media screen and (max-width: 567px) {
-    .personalize-section {
-      padding: 20px;
-    }
-  
-    .personalize-form {
-      width: 90%;
-    }
-  
-    button {
-      font-size: 1em;
-      padding: 10px 20px;
-    }
-  }
-  
+}
