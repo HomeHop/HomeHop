@@ -1,7 +1,7 @@
 # HomeHop - Google Chrome Built-in AI Challenge
 > Smart Rental Aggregator Chrome Extension
 
-> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
+> Live demo [_here_](https://www.youtube.com/watch?v=QPObEV2LcmQ). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
 * [General Info](#general-information)
