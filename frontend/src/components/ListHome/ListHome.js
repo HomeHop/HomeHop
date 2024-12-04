@@ -7,6 +7,8 @@ const ListHome = ({ houses }) => {
   const [locationError, setLocationError] = useState(null); // State for location error
   console.log(houses);
 
+  //houses is of the formtat {}
+
   // Fetch user location on component mount
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -93,7 +95,18 @@ const ListHome = ({ houses }) => {
             <p>Utilities Included: {house.utilities_included ? 'Yes' : 'No'}</p>
             <p>Cats Allowed: {house.cats ? 'Yes' : 'No'}</p>
             <p>Dogs Allowed: {house.dogs ? 'Yes' : 'No'}</p>
-            <p>Features: {house.features.join(', ')}</p>
+            <p>
+              Features:{' '}
+              {house.features.length > 0 ? (
+                <ul>
+                  {house.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+              ) : (
+                'None'
+              )}
+            </p>
             <p>Address: {house.address}</p>
             <p>City: {house.city}</p>
             <p>Province: {house.province}</p>

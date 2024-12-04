@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './Personalized.css';
 
 const Personalize = ({ submitPreferences }) => {
+  const [loading, setLoading] = useState(false);
   const [preferences, setPreferences] = useState({
 
     // Default preferences based on the data example
@@ -99,32 +100,40 @@ const Personalize = ({ submitPreferences }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const houseData = [];
+    setLoading(true);
+    
+    //define houseData that will be changed later to the actual data
+    let houseData = [];
+
 
     // const houseData = [
     //     { lat: 53.5461, lng: -113.4938, name: 'House A', price: '$1200/month' },
     //     { lat: 53.5444, lng: -113.4909, name: 'House B', price: '$900/month' },
     // ];
 
-    // Send request to backend to start scraping
-    fetch('http://localhost:5000/scrape', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ startScraping: true, preferences }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Scraping response:', data);
-        houseData.push(data);
-        
-      })
-      .catch((error) => {
+    const scrapeData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/scrape', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ startScraping: true, preferences }),
+        });
+  
+        const data = await response.json();
+        console.log('Scraping response:', data['listings']);
+        return data['listings'];
+      } catch (error) {
         console.error('Error starting scraping:', error);
-      });
+        return [];
+      }
+    };
+
+    houseData = await scrapeData();
+        
 
     
 
@@ -149,12 +158,15 @@ const Personalize = ({ submitPreferences }) => {
     });
 
     submitPreferences(preferences, houseData);
+    setLoading(false);
 };
 
   return (
     <div className="personalize-section">
       <h1>Personalize Your Search</h1>
       <p>Fill out the details below to customize your property search.</p>
+      {/* blur the form when loading */}
+      {/* {loading && <div className="loading-spinner"></div>} */}
       <form className="personalize-form" onSubmit={handleSubmit}>
         <label>
           Available:
@@ -180,14 +192,31 @@ const Personalize = ({ submitPreferences }) => {
         </label>
         <label>
           Features:
-          <select multiple={true} value={preferences.features} onChange={handleFeaturesChange}>
+          {/* select multiple */}
+          <select multiple name="features" value={preferences.features} onChange={handleFeaturesChange}>
             <option value="Dishwasher">Dishwasher</option>
             <option value="In-suite Storage">In-suite Storage</option>
             <option value="Laundry - Shared">Laundry - Shared</option>
             <option value="Balcony">Balcony</option>
-            <option value="Air Conditioning">Air Conditioning</option>
             <option value="Elevator">Elevator</option>
+            <option value="Storage Lockers">Storage Lockers</option>
+            <option value="Zero-Step Entrance">Zero-Step Entrance</option>
+            <option value="Fridge">Fridge</option>
+            <option value="Stove">Stove</option>
+            <option value="Microwave">Microwave</option>
+            <option value="Air Conditioning">Air Conditioning</option>
+            <option value="Internet">Internet</option>
+            <option value="Cable TV">Cable TV</option>
             <option value="Parking">Parking</option>
+            <option value="Fitness Center">Fitness Center</option>
+            <option value="Swimming Pool">Swimming Pool</option>
+            <option value="Wheelchair Accessible">Wheelchair Accessible</option>
+            <option value="Security Cameras">Security Cameras</option>
+            <option value="On-Site Staff">On-Site Staff</option>
+            <option value="Keyless Entry">Keyless Entry</option>
+            <option value="Security Alarm">Security Alarm</option>
+            <option value="Concierge">Concierge</option>
+            
           </select>
         </label>
         <label>
@@ -215,7 +244,8 @@ const Personalize = ({ submitPreferences }) => {
           </button>
         </label>
         <button type="submit">Submit</button>
-      </form>
+        {/* {loading && <div className="loading-spinner">Loading...</div>} */}
+        </form>
     </div>
   );
 };

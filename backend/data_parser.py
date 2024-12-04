@@ -29,7 +29,8 @@ def parse_csv(file_path):
                 'cats': row['cats'].lower() == 'true',
                 'dogs': row['dogs'].lower() == 'true',
                 'utilities_included': row['utilities_included'].lower() == 'true',
-                'features': row['features']
+                #features: "['feature1', 'feature2', 'feature3']" remove "" from both ends and split by ', ' to get a list of features
+                'features': row['features'][2:-2].split("', '"),
             }
             listings.append(listing)
 
@@ -38,10 +39,10 @@ def parse_csv(file_path):
 def send_to_frontend(data):
     # Assuming you have a backend server to handle this
     # Here we just print the JSON data
-    json_data = json.dumps(data, indent=2)
-    print(json_data)
+    # json_data = json.dumps(data, indent=2)
+    print(data[0])
 
 if __name__ == "__main__":
-    file_path = 'Toronto.csv'  # Replace with your CSV file path
+    file_path = 'Calgary.csv'  # Replace with your CSV file path
     listings = parse_csv(file_path)
     send_to_frontend(listings)
