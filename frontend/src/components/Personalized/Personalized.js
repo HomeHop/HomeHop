@@ -11,6 +11,8 @@ const Personalize = ({ submitPreferences }) => {
     propertyType: 'Apartment',
     preferredLocations: '',
     parking: false,
+    useCurrentLocation: false,
+    currentLocation: null,
   });
 
   const handleChange = (e) => {
@@ -19,6 +21,64 @@ const Personalize = ({ submitPreferences }) => {
       ...preferences,
       [name]: type === 'checkbox' ? checked : value,
     });
+  };
+
+  const handleLocationToggle = () => {
+    if (!preferences.useCurrentLocation) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const currentLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            console.log('Current Location:', currentLocation);
+            setPreferences({
+              ...preferences,
+              useCurrentLocation: true,
+              currentLocation: currentLocation,
+            });
+            
+            // Send this location to the backend endpoint
+            fetch('http://localhost:5000/location', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(currentLocation),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log('Location update response:', data);
+              })
+              .catch((error) => {
+                console.error('Error updating location:', error);
+              });
+          },
+          (error) => {
+            console.error('Error getting current location:', error);
+            setPreferences({
+              ...preferences,
+              useCurrentLocation: false,
+              currentLocation: null,
+            });
+          }
+        );
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+        setPreferences({
+          ...preferences,
+          useCurrentLocation: false,
+          currentLocation: null,
+        });
+      }
+    } else {
+      setPreferences({
+        ...preferences,
+        useCurrentLocation: false,
+        currentLocation: null,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -48,10 +108,9 @@ const Personalize = ({ submitPreferences }) => {
             });
         }
     });
+
+    submitPreferences(preferences);
 };
-
-
-
 
   return (
     <div className="personalize-section">
@@ -96,6 +155,12 @@ const Personalize = ({ submitPreferences }) => {
         <label>
           Parking Required:
           <input type="checkbox" name="parking" checked={preferences.parking} onChange={handleChange} />
+        </label>
+        <label>
+          Use Current Location:
+          <button type="button" onClick={handleLocationToggle}>
+            {preferences.useCurrentLocation ? 'Disable' : 'Enable'}
+          </button>
         </label>
         <button type="submit">Submit</button>
       </form>

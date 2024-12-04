@@ -12,8 +12,8 @@ const Navbar = ({ navigate }) => {
         <li onClick={() => navigate('personalize')} className="nav-item">
           Personalize
         </li>
-        <li onClick={() => navigate('map')} className="nav-item">
-          Map
+        <li onClick={() => navigate('listHome')} className="nav-item">
+          List of Homes
         </li>
       </ul>
     </nav>

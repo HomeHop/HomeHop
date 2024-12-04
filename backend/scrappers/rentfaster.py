@@ -2,7 +2,6 @@ import requests
 import time
 import os
 import pandas as pd
-from mongo_db import insert_listings_from_csv
 
 def query_rentfaster(city, province):
     results_df = pd.DataFrame()
@@ -18,7 +17,9 @@ def query_rentfaster(city, province):
         if data["listings"] == []:
             if page != 0:
                 if os.path.exists(city_name + '.csv'):
-                    city_name = city_name + str(city+province)
+                    # city_name = city_name + str(city+province)
+                    #update the contents of the csv file
+                    results_df.to_csv(city_name + '.csv', mode='a', header=False)
                 results_df.to_csv(city_name + '.csv')
             break
         results_df = pd.concat([results_df, pd.json_normalize(data["listings"])])
@@ -36,6 +37,6 @@ if __name__ == "__main__":
     province = input("Enter the province: ")
     query_rentfaster(city, province)
 
-    #insert listings into the database
-    insert_listings_from_csv(city + '.csv')
+
+
     print("Scraping complete!")
