@@ -12,8 +12,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Variables to store the current location of the user
-latitude = None
-longitude = None
+
 
 
 @app.route("/", methods=["GET"])
@@ -34,13 +33,15 @@ def update_location():
 def scrape_listings():
     data = request.get_json()
     
-    if data.get("startScraping"):
-        city, province = convert_coordinates_to_address(latitude, longitude)
-        print(city, province)
+    # if data.get("startScraping"):
+    #     # city, province = convert_coordinates_to_address(latitude, longitude)
+    #     print(city, province)
 
     # #dummy city and province
-    # city = "Calgary"
-    # province = "AB"
+    city = "Calgary"
+    province = "AB"
+
+    print(data.get("preferences"))
 
     # Call the query_rentfaster function from the rentfaster.py file
     query_rentfaster(city, province)

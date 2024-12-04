@@ -10,7 +10,9 @@ def parse_csv(file_path):
             listing = {
                 'id': row['id'],
                 'title': row['title'],
-                'price': row['price'],
+                # the price: '1 - 2' make it an int with the greater value ir last value
+                #eg '1 - 2' -> 2
+                'price': int(row['price'].split(' - ')[0]),
                 'type': row['type'],
                 # 'sq_feet': row['sq_feet'],
                 'availability': row['availability'],
@@ -20,12 +22,15 @@ def parse_csv(file_path):
                 'address': row['address'],
                 'city': row['city'],
                 'province': row['province'],
-                'bedrooms': row['bedrooms'],
-                'baths': row['baths'],
+                #bedrooms: '1 - 2' make it an int with the greater value ir last value, if it is a string stuff like 'Studio' make it 1
+                'bedrooms': int(row['bedrooms'].split(' - ')[-1]) if row['bedrooms'].isdigit() else 1,
+                #baths: '1 - 2' make it an int with the greater value ir last value, if it is 2.5 or decimals justt round it to the nearest integer
+                'baths': round(float(row['baths'].split(' - ')[-1])),
                 'cats': row['cats'].lower() == 'true',
                 'dogs': row['dogs'].lower() == 'true',
                 'utilities_included': row['utilities_included'].lower() == 'true',
-                'features': row['features']
+                #features: "['feature1', 'feature2', 'feature3']" remove "" from both ends and split by ', ' to get a list of features
+                'features': row['features'][2:-2].split("', '"),
             }
             listings.append(listing)
 
@@ -34,10 +39,10 @@ def parse_csv(file_path):
 def send_to_frontend(data):
     # Assuming you have a backend server to handle this
     # Here we just print the JSON data
-    json_data = json.dumps(data, indent=2)
-    print(json_data)
+    # json_data = json.dumps(data, indent=2)
+    print(data[0])
 
 if __name__ == "__main__":
-    file_path = 'Toronto.csv'  # Replace with your CSV file path
+    file_path = 'Calgary.csv'  # Replace with your CSV file path
     listings = parse_csv(file_path)
     send_to_frontend(listings)
