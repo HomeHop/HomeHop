@@ -16,7 +16,7 @@ def query_rentfaster(city, province):
         response = requests.post(url, cookies=cookies, timeout=10)
         response.raise_for_status()
         data = response.json()
-        print(data)
+        # print(data)
         
         if data["listings"] == []:
             if page != 0:
