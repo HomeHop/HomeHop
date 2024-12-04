@@ -57,20 +57,18 @@ function App() {
 
       return (
         
-        house.price <= preferences.price &&
+        house.price <= preferences.price //&&
         
-        house.bedrooms >= preferences.bedrooms &&
-        house.baths >= preferences.baths &&
-        (preferences.cats ? house.cats_allowed : true) &&
-        (preferences.dogs ? house.dogs_allowed : true) &&
-        (preferences.utilities_included ? house.utilities_included : true) //&&
+        // house.bedrooms >= preferences.bedrooms &&
+        // house.baths >= preferences.baths &&
+        // (preferences.cats ? house.cats_allowed : true) &&
+        // (preferences.dogs ? house.dogs_allowed : true) //&&
+        // (preferences.utilities_included ? house.utilities_included : true) //&&
+        // (preferences.type === 'Any' ? true : house.type === preferences.type) &&
         // (preferences.features.length === 0
         //   ? true
         //   // check if all selected features are included in the house features
-        //   : preferences.features.every((feature) => house.features.includes(feature))) //&&
-
-        // check if the house type matches the user's preference
-        // (preferences.type === 'Any' ? true : house.type === preferences.type)
+        //   : preferences.features.every((feature) => house.features.includes(feature)))
       );
     });
 
