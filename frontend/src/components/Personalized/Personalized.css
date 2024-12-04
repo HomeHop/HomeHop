@@ -313,4 +313,97 @@ select:focus {
   .form-section {
       gap: 1rem;
   }
+
+  /* Keep all the previous CSS styles and add/modify these: */
+
+/* Loading States */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  z-index: 10;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #E8EAED;
+  border-radius: 50%;
+  border-top-color: #4285F4;
+  animation: spin 1s linear infinite;
+}
+
+.chrome-card.loading {
+  position: relative;
+}
+
+/* Range Input Styling */
+.range-input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.range-value {
+  min-width: 60px;
+  padding: 0.25rem 0.5rem;
+  background: #F2F3F5;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #5F6368;
+}
+
+/* Features Select Styling */
+.features-select {
+  position: relative;
+}
+
+.features-select select {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.5rem;
+  border: 1px solid #E8EAED;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #202124;
+}
+
+.features-select .helper-text {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #5F6368;
+  text-align: right;
+}
+
+/* Range Group */
+.range-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 768px) {
+  .range-group {
+    gap: 0.75rem;
+  }
+  
+  .features-select select {
+    min-height: 100px;
+  }
+}
 }
