@@ -46,7 +46,8 @@
 
 
 ## Screenshots
-<img width="1436" alt="Screenshot 2024-12-03 at 11 27 46 PM" src="https://github.com/user-attachments/assets/7e2b731f-251d-4202-ba4a-045708ccfe7c">
+<img width="1431" alt="Screenshot 2024-12-04 at 12 06 28 AM" src="https://github.com/user-attachments/assets/1cf71224-f704-4f2a-995c-31904218ef00">
+
 
 ## Setup
 `npm install`
