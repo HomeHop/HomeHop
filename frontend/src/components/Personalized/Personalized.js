@@ -160,7 +160,7 @@ const Personalize = ({ submitPreferences }) => {
     submitPreferences(preferences, houseData);
     setLoading(false);
 };
-
+  
   return (
     <div className="personalize-section">
       <h1>Personalize Your Search</h1>
