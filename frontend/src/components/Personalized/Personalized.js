@@ -89,6 +89,25 @@ const Personalize = ({ submitPreferences }) => {
         { lat: 53.5444, lng: -113.4909, name: 'House B', price: '$900/month' },
     ];
 
+    // Send request to backend to start scraping
+    fetch('http://localhost:5000/scrape', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ startScraping: true, preferences }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Scraping response:', data);
+        // submitPreferences(data.listings); // Call submitPreferences with the scraped listings
+      })
+      .catch((error) => {
+        console.error('Error starting scraping:', error);
+      });
+
+    
+
     // Open Google Maps first
     chrome.runtime.sendMessage({ type: "OPEN_GOOGLE_MAPS" }, (response) => {
         if (chrome.runtime.lastError) {

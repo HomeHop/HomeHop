@@ -5,6 +5,8 @@ from data_parser import parse_csv
 import os
 import json
 from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut, GeocoderServiceError
+
 
 app = Flask(__name__)
 CORS(app)
@@ -36,6 +38,10 @@ def scrape_listings():
         city, province = convert_coordinates_to_address(latitude, longitude)
         print(city, province)
 
+    # #dummy city and province
+    # city = "Calgary"
+    # province = "AB"
+
     # Call the query_rentfaster function from the rentfaster.py file
     query_rentfaster(city, province)
 
@@ -50,19 +56,28 @@ def scrape_listings():
 
 
 def convert_coordinates_to_address(latitude, longitude):
-    geolocator = Nominatim(user_agent="geoapiExercises")
-    location = geolocator.reverse((latitude, longitude))
-    #from location.address get city and province
-    address = location.address
-    address = address.split(',')
-    city = address["city"]
-    province = address["state"]
-    return city, province
+    try:
+        # Use a descriptive and unique user agent
+        geolocator = Nominatim(user_agent="my_unique_app/1.0")
+        location = geolocator.reverse((latitude, longitude), addressdetails=True)
+        
+        if location and location.raw.get("address"):
+            address = location.raw["address"]
+            print(address)
+            city = address.get("city", "") or address.get("town", "") or address.get("county", "")
+            province = address.get("state", "")
+            return city, province
+        else:
+            return None, None
+    
+    except (GeocoderTimedOut, GeocoderServiceError) as e:
+        print(f"Error: {e}")
+        return None, None
 
 
 if __name__ == "__main__":
-    lat = 43.653225
-    lng = -79.383186
+    # lat = 42.653225
+    # lng = -79.383186
     # city, province = convert_coordinates_to_address(lat, lng)
     # print(city, province)
     #run the app on port 5000
